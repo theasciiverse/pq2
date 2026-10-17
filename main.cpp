@@ -2,6 +2,7 @@
 #include <memory>
 #include <thread>
 #include <string>
+#include <filesystem>
 #include <utils.hpp>
 #include <game.hpp>
 #include <pq2gui.hpp>
@@ -49,6 +50,16 @@ int main(const int argc, const char * const *argv) {
         return 1;
     }
     auto game = make_shared<Game>();
+    if (!filename.empty() && !filesystem::exists(filename) && !filesystem::path(filename).has_parent_path()) {
+        // a bare name that is not here is looked for among the saved games
+        // in the data folder, with or without its .pq2
+        for (const auto &name : {filename, filename + ".pq2"}) {
+            if (const auto saved = DataDir() / name; filesystem::exists(saved)) {
+                filename = saved.string();
+                break;
+            }
+        }
+    }
     if (!filename.empty()) {
         if (const file::LoadError error = game->LoadGame(filename); error != file::LoadErrorNone) {
             cout << "Error loading save " << filename << endl;

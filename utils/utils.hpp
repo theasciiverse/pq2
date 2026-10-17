@@ -11,3 +11,4 @@
 #include "romannumerals.hpp"
 #include "namegenerator.hpp"
 #include "plural.hpp"
+#include "datadir.hpp"

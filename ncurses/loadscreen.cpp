@@ -5,11 +5,13 @@
 #include "loadscreen.hpp"
 #include <ranges>
 #include <format>
+#include <system_error>
+#include <utils.hpp>
 
 #define LEFT 2
 
 LoadScreen::LoadScreen(const std::shared_ptr<Game> &game, const MessageHandler &message_handler) : NCursesView(game, message_handler) {
-    ChangeDir(std::filesystem::current_path());
+    ChangeDir(DataDir());
 }
 
 void LoadScreen::ChangeDir(const std::filesystem::path &new_path) {
@@ -24,7 +26,9 @@ void LoadScreen::ChangeDir(const std::filesystem::path &new_path) {
     if (path.has_parent_path()) {
         files.emplace_back("..");
     }
-    for (auto &entry: std::filesystem::directory_iterator(path)) {
+    // a folder that cannot be read (another user's, say) just lists as empty
+    std::error_code error;
+    for (auto &entry: std::filesystem::directory_iterator(path, error)) {
         if (entry.is_directory() || entry.path().extension() == ".pq2") {
             files.push_back(entry.path());
         }

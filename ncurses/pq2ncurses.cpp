@@ -69,7 +69,7 @@ void NCursesGUI::HandleMessage(const std::string& message) {
         }
     }
     else if (message == "start") {
-        game->SaveGame(game->GetCharacter().Name + ".pq2");
+        game->SaveGame((DataDir() / (game->GetCharacter().Name + ".pq2")).string());
         PopAllViews();
         ShowGameScreen();
     }

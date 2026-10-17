@@ -18,6 +18,8 @@ set(
         namegenerator.hpp
         plural.cpp
         plural.hpp
+        datadir.cpp
+        datadir.hpp
 )
 
 add_library(pq2utils STATIC ${SOURCE_FILES})
