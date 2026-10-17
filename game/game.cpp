@@ -226,7 +226,6 @@ GameState Game::GetState() const {
 }
 
 void Game::Close() {
-    cout << "Closing" << endl;
     SaveGame();
     game_state = GameStateFinished;
 }

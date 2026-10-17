@@ -28,7 +28,6 @@ NCursesGUI::NCursesGUI(const std::shared_ptr<Game> &game) : GUI(game), screen_wi
 
 NCursesGUI::~NCursesGUI() {
     endwin();
-    cout << "cleaning up" << endl;
 }
 
 void NCursesGUI::Run() {
