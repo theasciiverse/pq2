@@ -90,9 +90,9 @@ void LoadScreen::Render() {
     }
     if (has_error) {
         if (!popup) {
-            popup = subwin(win, 4, 46, 10, 17);
+            popup = derwin(win, 4, 46, 10, 17);
         }
-        wclear(popup);
+        werase(popup);
         box(popup, 0, 0);
         LeftAlign(popup, "Error:", LEFT, 0);
         LeftAlign(popup, "There was an error loading the save file.", LEFT, 1);

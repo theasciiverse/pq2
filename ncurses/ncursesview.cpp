@@ -37,11 +37,11 @@ void NCursesView::ShowPopup(const std::string &label, const std::vector<std::str
         if (popup) {
             delwin(popup);
         }
-        popup = subwin(win, height, width, 1, 4);
+        popup = derwin(win, height, width, 1, 4);
         last_popup_height = height;
         last_popup_width = width;
     }
-    wclear(popup);
+    werase(popup);
     box(popup, 0, 0);
     LeftAlign(popup, label, 2, 0);
     if (rows < desired_rows) {
@@ -82,15 +82,25 @@ void NCursesView::ClearPopup() {
 void NCursesView::Resize(const int new_screen_width, const int new_screen_height) {
     screen_width = new_screen_width;
     screen_height = new_screen_height;
+    // the popup is a subwindow of win, so it goes first
+    ClearPopup();
     delwin(win);
-    win = newwin(std::min(required_height, screen_height), std::min(required_width, screen_width), 0, 0);
+    // the 80x24 screen sits in the middle of a bigger terminal
+    const int height = std::min(required_height, screen_height);
+    const int width = std::min(required_width, screen_width);
+    win = newwin(height, width, (screen_height - height) / 2, (screen_width - width) / 2);
+    // and whatever was drawn before the terminal changed size is cleared
+    erase();
+    wnoutrefresh(stdscr);
     keypad(win, true);
     nodelay(win, true);
     wtimeout(win, 100);
 }
 
 void NCursesView::Update() {
-    wclear(win);
+    // werase, not wclear: wclear makes curses repaint the whole terminal
+    // on every frame, which flickers
+    werase(win);
     if (screen_width < required_width || screen_height < required_height) {
         wprintw(win, "Progress Quest 2 requires a terminal of at least 80x24");
     }
