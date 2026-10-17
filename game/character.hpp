@@ -18,20 +18,20 @@ struct Character {
     data::Race CharacterRace;
     data::Class CharacterClass;
 
-    uint64_t Level;
-    uint64_t Experience;
+    uint64_t Level{};
+    uint64_t Experience{};
 
-    uint64_t STR;
-    uint64_t CON;
-    uint64_t DEX;
-    uint64_t INT;
-    uint64_t WIS;
-    uint64_t CHA;
+    uint64_t STR{};
+    uint64_t CON{};
+    uint64_t DEX{};
+    uint64_t INT{};
+    uint64_t WIS{};
+    uint64_t CHA{};
 
-    uint64_t MAX_HP;
-    uint64_t MAX_MP;
+    uint64_t MAX_HP{};
+    uint64_t MAX_MP{};
 
-    uint64_t Gold;
+    uint64_t Gold{};
 
     std::vector<data::Stack> Spells;
     std::array<std::string, 11> Equipment;
@@ -41,14 +41,14 @@ struct Character {
 
     std::deque<data::QueueItem> Queue;
 
-    data::CurrentActionType CurrentAction;
+    data::CurrentActionType CurrentAction{};
     std::string CurrentActionLabel;
-    data::Monster CurrentMonster;
-    uint64_t CurrentProgress;
-    uint64_t MaxProgress;
-    uint64_t CurrentPlotProgress;
-    uint64_t CurrentQuestProgress;
-    uint64_t MaxQuestProgress;
+    data::Monster CurrentMonster{};
+    uint64_t CurrentProgress{};
+    uint64_t MaxProgress{};
+    uint64_t CurrentPlotProgress{};
+    uint64_t CurrentQuestProgress{};
+    uint64_t MaxQuestProgress{};
 
     uint64_t CalculateHash() const;
 
