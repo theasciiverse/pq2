@@ -1,0 +1,7 @@
+# pq2, its GPL-3.0 licence, and the notices for the Progress Quest data
+# and nlohmann/json it carries
+out/pq2
+LICENSE
+asciiverse/pq2/NOTICE
+asciiverse/pq2/LICENSE.progressquest
+third_party/nlohmann_json/LICENSE.MIT -> LICENSE.nlohmann_json

@@ -1,0 +1,16 @@
+pq2 is Nick Bollom's remake of Progress Quest, the 2002 game by Eric
+Fredricksen (http://progressquest.com). It is not the original and is
+not made or endorsed by Eric Fredricksen.
+
+pq2 is free software under the GNU General Public License, version 3:
+see LICENSE. Its source, with the changes made for the Asciiverse
+catalog listed in PATCHES.md, is at https://github.com/theasciiverse/pq2
+(upstream: https://github.com/nbollom/pq2).
+
+Its game data (races, classes, monsters, spells, items and the rest)
+comes from Progress Quest, which Eric Fredricksen released under the MIT
+licence: see LICENSE.progressquest, copied from
+http://progressquest.com/license.txt.
+
+The program includes nlohmann/json 3.11.3 by Niels Lohmann, under the
+MIT licence: see LICENSE.nlohmann_json.
