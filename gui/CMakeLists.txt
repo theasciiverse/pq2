@@ -9,7 +9,7 @@ set(
         view.hpp
 )
 
-add_library(pq2gui SHARED ${SOURCE_FILES})
+add_library(pq2gui STATIC ${SOURCE_FILES})
 
 target_link_libraries(pq2gui pq2game)
 target_include_directories(pq2gui

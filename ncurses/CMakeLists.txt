@@ -17,10 +17,16 @@ set(
         loadscreen.hpp
 )
 
-add_library(pq2ncurses SHARED ${SOURCE_FILES})
+add_library(pq2ncurses STATIC ${SOURCE_FILES})
 
-target_link_libraries(pq2ncurses pq2gui pq2game pq2utils ncurses)
+# the wide-character ncurses, which draws the progress bars' block
+# characters; on Debian and Ubuntu plain -lncurses is the narrow one
+set(CURSES_NEED_NCURSES TRUE)
+set(CURSES_NEED_WIDE TRUE)
+find_package(Curses REQUIRED)
+
+target_link_libraries(pq2ncurses pq2gui pq2game pq2utils ${CURSES_LIBRARIES})
 target_include_directories(pq2ncurses
-        PRIVATE pq2gui pq2game pq2utils
+        PRIVATE pq2gui pq2game pq2utils ${CURSES_INCLUDE_DIRS}
         INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 )

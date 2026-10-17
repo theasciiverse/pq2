@@ -1,18 +1,12 @@
 cmake_minimum_required(VERSION 3.27)
 project(pq2game)
 
-include(FetchContent)
-
-FetchContent_Declare(
-    nlohmann_json
-    GIT_REPOSITORY https://github.com/nlohmann/json.git
-    GIT_TAG v3.11.3
-    GIT_SHALLOW ON
-    GIT_PROGRESS ON
-    FIND_PACKAGE_ARGS 3.11.3
-)
-
-FetchContent_MakeAvailable(nlohmann_json)
+# nlohmann_json 3.11.3, the version upstream fetched at build time, is
+# kept in third_party/ (its single header, sha256 9bea4c80...103ea6, as
+# published with the release), so a build needs no network.
+add_library(nlohmann_json INTERFACE)
+target_include_directories(nlohmann_json SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/nlohmann_json)
+add_library(nlohmann_json::nlohmann_json ALIAS nlohmann_json)
 
 find_package(ZLIB REQUIRED)
 
@@ -59,7 +53,7 @@ set(
         character.cpp
 )
 
-add_library(pq2game SHARED ${SOURCE_FILES})
+add_library(pq2game STATIC ${SOURCE_FILES})
 
 target_link_libraries(pq2game PRIVATE pq2utils nlohmann_json::nlohmann_json ZLIB::ZLIB)
 target_include_directories(pq2game
