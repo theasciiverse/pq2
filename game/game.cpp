@@ -113,8 +113,13 @@ LoadError Game::LoadGame(const string &filename_path) {
     }
     char buffer[1024];
     std::stringstream string_buffer;
-    while (const int read = gzread(file, &buffer, sizeof(buffer))) {
+    int read;
+    while ((read = gzread(file, &buffer, sizeof(buffer))) > 0) {
         string_buffer.write(buffer, read);
+    }
+    gzclose(file);
+    if (read < 0) {
+        return LoadErrorNotValidSaveFile;
     }
     try {
         deserialize(string_buffer.str(), character);
@@ -122,7 +127,6 @@ LoadError Game::LoadGame(const string &filename_path) {
     catch (const std::exception &error) {
         return LoadErrorNotValidSaveFile;
     }
-    gzclose(file);
     filename = filename_path;
     game_state = GameStateReady; //if loaded successfully
     return LoadErrorNone;
