@@ -3,6 +3,7 @@
 //
 
 #include "loadscreen.hpp"
+#include <algorithm>
 #include <ranges>
 #include <format>
 #include <system_error>
