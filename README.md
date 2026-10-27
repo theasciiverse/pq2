@@ -1,3 +1,16 @@
+> **Play it with Asciiverse.** With [av](https://asciiverse.sh), the Asciiverse
+> client:
+>
+> ```
+> av install pq2
+> av play pq2
+> ```
+>
+> Or download the archive for your system from this repository's Releases,
+> unpack it and run `./pq2` (`pq2.exe` on Windows).
+>
+> The original README follows.
+
 # pq2
 A cross-platform remake of the awesome idle game Progress Quest
 

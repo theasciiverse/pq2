@@ -125,3 +125,9 @@ are not shipped.
 - `asciiverse/record/pq2.py` plays the preview through `rec.py`, from
   the NetBSD games' recorder; `asciiverse/casts/pq2.cast` is its
   recording.
+
+## Ours
+
+- **How to play it, at the top of README.md.** A short note on installing and
+  starting it with av, or from a release archive; the original text follows
+  unchanged.
