@@ -6,7 +6,7 @@
 #
 #   asciiverse/build.sh                       # Debian, Ubuntu
 #   STATIC=1 asciiverse/build.sh              # Alpine, static musl binary
-#   CXXFLAGS="-arch arm64" LDFLAGS="-arch arm64" asciiverse/build.sh  # macOS
+#   CMAKE_OSX_ARCHITECTURES=arm64 MACOSX_DEPLOYMENT_TARGET=13.3 asciiverse/build.sh  # macOS
 #   BUILD_TYPE=Debug CXXFLAGS=-fsanitize=address LDFLAGS=-fsanitize=address asciiverse/build.sh
 #
 # Needs CMake 3.27 or newer, a C++23 compiler, ncurses (wide) and zlib.

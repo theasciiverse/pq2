@@ -62,8 +62,9 @@ jobs:
           - { target: aarch64-apple-darwin, arch: arm64 }
     runs-on: macos-15
     env:
-      # std::filesystem needs 10.15; the precedent's 11.0 covers it
-      MACOSX_DEPLOYMENT_TARGET: "11.0"
+      # std::format pulls in libc++'s floating-point std::to_chars, which
+      # Apple's libc++ has from macOS 13.3 on
+      MACOSX_DEPLOYMENT_TARGET: "13.3"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -71,7 +72,7 @@ jobs:
 
       - name: Build and package
         run: |
-          CXXFLAGS="-arch ${{ matrix.arch }}" LDFLAGS="-arch ${{ matrix.arch }}" asciiverse/build.sh
+          CMAKE_OSX_ARCHITECTURES=${{ matrix.arch }} asciiverse/build.sh
           file out/pq2
           asciiverse/package.sh ${{ matrix.target }}
 

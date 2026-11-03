@@ -45,7 +45,8 @@ are not shipped.
   C++ library statically (Alpine). `asciiverse/package.sh` packs
   `dist/pq2-<target>.tar.gz` from `asciiverse/archive/pq2.txt`.
   `.github/workflows/release.yml` builds static musl Linux (x86_64,
-  aarch64) and macOS (x86_64, arm64) on a tag. No Windows build:
+  aarch64) and macOS (x86_64, arm64, for macOS 13.3 and later, where
+  Apple's C++ library has everything `std::format` needs) on a tag. No Windows build:
   upstream turns the ncurses edition off on Windows. Upstream's own
   workflows run only on pushes to `master`, so they stay as they are.
 
